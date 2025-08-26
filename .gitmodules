@@ -1,0 +1,3 @@
+[submodule "DAGV1700/AdventureGame/Assets/Tools"]
+	path = DAGV1700/AdventureGame/Assets/Tools
+	url = https://github.com/anthonyromrell/ArtisanDream.Tools
