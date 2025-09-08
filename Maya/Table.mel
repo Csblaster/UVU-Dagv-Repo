@@ -1,0 +1,21 @@
+
+float $tableWidth = 6;
+float $tableDepth = 4;
+float $tableHeight = 3;
+float $legThickness = 0.3;
+float $legHeight = $tableHeight;
+
+string $top[] = `polyCube -w $tableWidth -h 0.2 -d $tableDepth -name "TableTop"`;
+move 0 ($tableHeight + 0.1) 0 $top[0];
+
+
+float $xPos[] = {-$tableWidth/2 + $legThickness/2, $tableWidth/2 - $legThickness/2};
+float $zPos[] = {-$tableDepth/2 + $legThickness/2, $tableDepth/2 - $legThickness/2};
+
+
+for ($x in $xPos) {
+    for ($z in $zPos) {
+        string $leg[] = `polyCube -w $legThickness -h $legHeight -d $legThickness -name "Leg"`;
+        move $x ($legHeight/2) $z $leg[0];
+    }
+}
