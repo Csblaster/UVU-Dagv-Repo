@@ -1,0 +1,15 @@
+global proc GenerateStaircase(int $stepNumber, float $stepLength, float $stepWidth, float $stepHeight, float $stepOffset, float $stepRotation)
+{
+    for ($i = 0; $i < $stepNumber; $i++) {
+        string $step[] = `polyCube -w $stepLength -h $stepHeight -d $stepWidth`;
+        float $yPos = $i * $stepHeight;
+        float $angle = $i * $stepRotation;
+        float $rad = $angle * 3.14159265 / 180.0;
+        float $xPos = cos($rad) * $stepOffset;
+        float $zPos = sin($rad) * $stepOffset;
+        move $xPos $yPos $zPos $step[0];
+        rotate 0 ($angle + 90) 0 $step[0];
+    }
+}
+
+GenerateStaircase(1, 1, 1, 1, 1, 1);

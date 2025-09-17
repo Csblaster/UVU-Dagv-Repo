@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 [CreateAssetMenu(menuName = "Single Variables/IntData")]
 public class IntData : ScriptableObject
 {
     [SerializeField] private int value, minValue, maxValue;
 
-    public UnityEvent<float> valueOutOfRange;
+    public UnityEvent<int> valueOutOfRange;
     public UnityEvent onValueChanged;
 
     public int Value
@@ -23,35 +22,36 @@ public class IntData : ScriptableObject
 
     public void UpdateValue(int amount)
     {
-        value += amount;
+        Value += amount;
     }
 
     public void SetValue(IntData data)
     {
-        value = data.value;
+        Value = data.value;
     }
-    
+
     public void SetValue(int data)
     {
         Value = data;
     }
-    
+
     public void IncrementValue()
     {
-        value++;
-        onValueChanged.Invoke();
-    }
-
-    private void CheckValueRange()
-    {
-        if (value >= minValue && value <= maxValue) return;
-        valueOutOfRange.Invoke(value);
-        Value = Mathf.Clamp(Value, minValue, maxValue);
+        Value++;
     }
 
     public void UpdateValueZeroCheck(int i)
     {
-        if (value + i < 0) return;
-        value += i;
+        if (Value + i < 0) return;
+        Value += i;
+    }
+
+    private void CheckValueRange()
+    {
+        if (Value < minValue || Value > maxValue)
+        {
+            valueOutOfRange.Invoke(Value);
+            Value = Mathf.Clamp(Value, minValue, maxValue);
+        }
     }
 }
