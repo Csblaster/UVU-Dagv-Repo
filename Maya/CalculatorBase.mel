@@ -1,0 +1,77 @@
+global proc float calculator(string $op, float $vals[])
+{
+    float $result = 0;
+
+    if ($op == "add")
+    {
+        $result = `add $vals`;
+        print("The sum of ");
+        for ($i=0; $i<size($vals); $i++)
+        {
+            print($vals[$i]);
+            if ($i < size($vals)-1) print(", ");
+        }
+        print(" is " + $result + "\n");
+    }
+    else if ($op == "subtract")
+    {
+        $result = `subtract $vals`;
+        print("The difference of ");
+        for ($i=0; $i<size($vals); $i++)
+        {
+            print($vals[$i]);
+            if ($i < size($vals)-1) print(", ");
+        }
+        print(" is " + $result + "\n");
+    }
+    else if ($op == "multiply")
+    {
+        $result = `multiply $vals`;
+        print("The product of ");
+        for ($i=0; $i<size($vals); $i++)
+        {
+            print($vals[$i]);
+            if ($i < size($vals)-1) print(", ");
+        }
+        print(" is " + $result + "\n");
+    }
+    else if ($op == "divide")
+    {
+        $result = `divide $vals`;
+        print("The quotient of ");
+        for ($i=0; $i<size($vals); $i++)
+        {
+            print($vals[$i]);
+            if ($i < size($vals)-1) print(", ");
+        }
+        print(" is " + $result + "\n");
+    }
+    else if ($op == "mean")
+    {
+        $result = `mean $vals`;
+        print("The mean of ");
+        for ($i=0; $i<size($vals); $i++)
+        {
+            print($vals[$i]);
+            if ($i < size($vals)-1) print(", ");
+        }
+        print(" is " + $result + "\n");
+    }
+    else if ($op == "median")
+    {
+        $result = `median $vals`;
+        print("The median of ");
+        for ($i=0; $i<size($vals); $i++)
+        {
+            print($vals[$i]);
+            if ($i < size($vals)-1) print(", ");
+        }
+        print(" is " + $result + "\n");
+    }
+    else
+    {
+        error("Unknown operation: " + $op + "\n");
+    }
+
+    return $result;
+}
