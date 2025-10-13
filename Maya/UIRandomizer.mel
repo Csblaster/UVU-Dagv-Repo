@@ -1,0 +1,45 @@
+global proc randomDupUI()
+{
+    if (`window -exists randomDupWindow`)
+        deleteUI randomDupWindow;
+
+    window -title "Random Duplicator Tool" randomDupWindow;
+    columnLayout -adjustableColumn true;
+
+    intFieldGrp -numberOfFields 1 -label "Number of Duplicates" numDupField;
+    floatFieldGrp -numberOfFields 3 -label "Min X Y Z" -value1 -10 -value2 -10 -value3 -10 minRangeField;
+    floatFieldGrp -numberOfFields 3 -label "Max X Y Z" -value1 10 -value2 10 -value3 10 maxRangeField;
+
+    button -label "Duplicate and Scatter" -command "duplicateAndScatter()";
+
+    showWindow randomDupWindow;
+}
+
+global proc duplicateAndScatter()
+{
+    int $numDup = `intFieldGrp -q -value1 numDupField`;
+    float $minVals[] = `floatFieldGrp -q -value minRangeField`;
+    float $maxVals[] = `floatFieldGrp -q -value maxRangeField`;
+
+    string $sel[] = `ls -sl`;
+
+    if (size($sel) == 0)
+    {
+        warning "Please select at least one object first.";
+        return;
+    }
+
+    for ($obj in $sel)
+    {
+        for ($i = 0; $i < $numDup; $i++)
+        {
+            string $newObj[] = `duplicate $obj`;
+            float $x = `rand $minVals[0] $maxVals[0]`;
+            float $y = `rand $minVals[1] $maxVals[1]`;
+            float $z = `rand $minVals[2] $maxVals[2]`;
+            move $x $y $z $newObj[0];
+        }
+    }
+
+    print("Duplication complete!\n");
+}
