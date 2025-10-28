@@ -75,3 +75,47 @@ global proc float calculator(string $op, float $vals[])
 
     return $result;
 }
+global proc calculatorUI()
+{
+    if (`window -exists calcWin`)
+        deleteUI calcWin;
+
+    window -title "Calculator UI" -widthHeight 300 200 calcWin;
+    columnLayout -adjustableColumn true;
+
+    text -label "Select Operation:";
+    optionMenu opMenu;
+        menuItem -label "add";
+        menuItem -label "subtract";
+        menuItem -label "multiply";
+        menuItem -label "divide";
+        menuItem -label "mean";
+        menuItem -label "median";
+
+    text -label "Enter numbers (comma-separated):";
+    textField valsField;
+
+    button -label "Calculate" -command "calculatorUICalculate()";
+
+    text -label "Result:";
+    textField -editable false resultField;
+
+    showWindow calcWin;
+}
+
+global proc calculatorUICalculate()
+{
+    string $op = `optionMenu -q -v opMenu`;
+    string $valsText = `textField -q -text valsField`;
+    string $valsStringArray[] = stringToStringArray($valsText, ",");
+    float $vals[];
+    for ($v in $valsStringArray)
+    {
+        float $f = atof($v);
+        $vals[size($vals)] = $f;
+    }
+    float $result = `calculator $op $vals`;
+    textField -e -text ($result) resultField;
+}
+
+calculatorUI();
