@@ -1,0 +1,18 @@
+<linker>
+	<assembly fullname="Assembly-CSharp" ignoreIfMissing="1">
+		<type fullname="GameLogic">
+			<method name="Player1Turn"/>
+			<method name="Player1Turn"/>
+			<method name="Player1Turn"/>
+			<method name="Player2Turn"/>
+			<method name="Player2Turn"/>
+			<method name="Player2Turn"/>
+			<method name="SetCard"/>
+			<method name="SetCard"/>
+			<method name="SetCard"/>
+			<method name="SetCard"/>
+			<method name="SetCard"/>
+			<method name="SetCard"/>
+		</type>
+	</assembly>
+</linker>
